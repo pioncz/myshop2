@@ -1,0 +1,10 @@
+<h2><%= @category.name %></h2>
+<table>
+<% @products.each do |product| %>
+  <tr>
+  <td><%= product.name %></td>
+  <td><%= link_to "More", product %></td>
+  </tr>
+<% end %>
+</table>
+<%= link_to "Back", root_path %>

@@ -1,0 +1,20 @@
+<p>Witaj!</p>
+Twoje id to: <%= @buyer.id %><br>
+<% if @order_items == [] %>
+	Twój koszyk jest pusty.<br>
+<% else %>
+
+	<table>
+	<tr><td>Produkt</td><td>Ilość</td><td>Cena</td></tr>
+
+	<% @order_items.each do |item| %>
+	  <tr>
+	  <td><%= item.product.name %></td>
+	  <td><%= item.quantity %></td>
+	  <td><%= item.price %></td>
+	  </tr>
+	<% end %>
+
+	</table>
+<%= link_to "Złóż zamówienie", confirm_path %><br>
+<% end %>

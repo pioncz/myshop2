@@ -1,0 +1,12 @@
+<%= search_form_for @q, :url => search_path,
+                        :html => {:method => :post} do |f| %>
+  <b><%= f.label "Wyszukaj:" %></b></br>
+  <%= radio_button_tag(:type1, "1", :selected => true) %>
+  <%= f.label "Kategorie" %>
+  <%= radio_button_tag(:type1, "2") %>
+  <%= f.label "produkt" %>
+  wyszukaj po
+  <%= select_tag(:type2, options_for_select([['nazwa', 1], ['opis', 2], ['ceny mniejsze od', 3], ['ceny większe od', 4]])) %>
+  <%= f.text_field :name_cont %>
+  <%= f.submit "Szukaj" %>
+<% end %>

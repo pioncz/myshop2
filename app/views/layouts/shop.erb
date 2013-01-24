@@ -1,0 +1,63 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>GUITAR SHOP</title>
+
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div id="templatemo_body_wrapper">
+	<div id="templatemo_wrapper">
+    	
+        <div id="templatemo_header">
+            <div id="site_title"><h1><%= link_to "Home", root_path %></h1></div>
+            <div id="templatemo_menu">
+                <ul>
+                  <%= render :partial => "head/link_area" %>
+                </ul>
+            </div> <!-- end of templatemo_menu -->
+        </div><!-- end of header -->
+        
+        <div id="templatemo_middle">
+            <div id="mid_left">
+                <div id="mid_title"><%= @random_product.name %></div>
+                <p><%= @random_product.description %></p>
+                <p>Tylko <%= @random_product.price %>zł!</p>
+                <p><%= button_to("Do koszyka", {:controller => "orders", :action => "create", :id => @random_product.id})%></p>
+            </div>
+        </div> <!-- end of middle -->
+        
+        <div id="templatemo_main">
+
+            <div class="cbox_fw">
+                <%= render :partial => "searches/search_bar" %>
+                <div class="cleaner"></div>
+            </div>
+
+            <div class="cbox_fw">
+                <%= yield %>
+                <div class="cleaner"></div>
+            </div>
+            
+        </div> <!-- end of main -->
+    
+    </div>
+</div>
+
+<div id="templatemo_footer_wrapper">
+    <div id="templatemo_footer">
+        Copyright © 2072 <a href="#">Guitar Shop</a> | Designed by <a href="http://www.templatemo.com" target="_parent">Free CSS Templates</a>
+        <div class="cleaner"></div>
+    </div>
+</div>
+
+
+
+
+</body>
+</html>

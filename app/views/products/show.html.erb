@@ -1,0 +1,45 @@
+<h2><%= @product.name %></h2>
+<table>
+  <tr>
+  	<td>Opis:</td><td><%= @product.description %></td>
+  </tr>
+  <tr>
+  	<td>Cena:</td><td><%= @product.price %></td>
+  </tr>
+  <tr>
+    <td>Opinie użytkowników:</td>
+    <td>
+      <table>
+      <% @product.comments.each do |comment| %>
+        <tr>
+        <td><%= comment.commenter %></td>
+        <td><%= comment.body %></td>
+        </tr>
+      <% end %>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <% if user_signed_in? %>
+      <td>Dodaj opinię</td>
+      <td>
+        <%= form_tag({:controller => "comments", :action => "create"}, :method => "post") do %>
+          <input type="hidden" name="id" value="<%= @product.id %>" />
+          <%= label_tag("Tresc:") %>
+          <%= text_area_tag(:body) %>
+          <%= submit_tag("Wyslij") %>
+        <% end %>
+      </td>
+    <% else %>
+      <td>
+        Aby dodać opinię musisz być zalogowany.
+      </td>
+    <% end %>
+  </tr>
+  <tr>
+  	<td><%= button_to("Do koszyka", {:controller => "orders", :action => "create", :id => @product.id})%></td>
+  </tr>
+  <tr>
+  	<td><%= link_to "Back", root_path %></td>
+  </tr>
+</table>

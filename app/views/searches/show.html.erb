@@ -1,0 +1,30 @@
+<%= render :partial => "searches/search_bar" %>
+
+<% if @results %>
+	<% if @results.count > 0 %>
+		<b>Wynik wyszukiwania:</b><br>
+		<% if @type == 1 %>
+			<table>
+			<% @results.each do |r| %>
+			  <tr>
+			  <td><%= r.name %></td>
+			  <td><%= link_to "More", r %></td>
+			  </tr>
+			<% end %>
+			</table>
+		<% else %>
+			<table>
+			<% @results.each do |r| %>
+			  <tr>
+			  <td><%= r.name %></td>
+			  <td><%= r.description %></td>
+			  <td><%= r.price %></td>
+			  <td><%= link_to "More", r %></td>
+			  </tr>
+			<% end %>
+			</table>
+		<% end %>
+	<% else %>
+		<b>Niczego nie znaleziono.</b>
+	<% end %>
+<% end %>

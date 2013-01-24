@@ -1,0 +1,89 @@
+<h1>Welcome to admin panel</h1>
+<h2>Zamówienia</h2>
+
+<table>
+	<tr><td>Id zamowienia</td><td>Id buyera</td><td>Kupione przedmioty</td></tr>
+	<% @orders.each do |order| %>
+	<tr>
+		<td><%= order.id %></td>
+		<td><%= order.buyer_id %></td>
+		<td>
+		<table>
+		<tr><td>Produkt</td><td>Ilość</td><td>Cena</td></tr>
+
+		<% order.order_items.each do |item| %>
+		  <tr>
+		  <td><%= item.product.name %></td>
+		  <td><%= item.quantity %></td>
+		  <td><%= item.price %></td>
+		  </tr>
+		<% end %>
+
+		</table>
+		</td>
+	</tr>
+	<% end %>
+</table>
+
+<h2>Kategorie</h2>
+<table><tr><td>Aktualna nazwa</td><td>Nowa nazwa</td><td>Usun</td></tr>
+<% @categories.each do |category| %>
+  <tr>
+  <td><%= category.name %></td>
+  <td>
+	<%= form_tag(admin_category_path, :method => "put") do %>
+		<%= hidden_field_tag(:id, category.id) %>
+		<%= text_field_tag(:name) %>
+		<%= submit_tag("Update") %>
+	<% end %>
+  </td>
+  <td>
+	<%= form_tag(admin_category_path, :method => "delete") do %>
+		<%= hidden_field_tag(:id, category.id) %>
+		<%= submit_tag("Delete") %>
+	<% end %>
+  </td>
+  </tr>
+<% end %>
+<tr><td>Nowa kategoria</td></tr>
+<tr>
+	<%= form_tag(admin_category_path, :method => "post") do %>
+		<td><%= text_field_tag(:name) %></td>
+		<td><%= submit_tag("Create") %></td>
+	<% end %>
+</tr>
+</table>
+
+
+<h2>Produkty</h2>
+<table><tr><td>Aktualna nazwa</td><td>Aktualny opis</td><td>Aktualna cena</td><td>Nowa nazwa</td><td>Nowy opis</td><td>Nowa cena</td><td>Usun</td></tr>
+<% @products.each do |product| %>
+  <tr>
+  <td><%= product.name %></td>
+  <td><%= product.description %></td>
+  <td><%= product.price %></td>
+  <%= form_tag(admin_product_path, :method => "put") do %>
+  <%= hidden_field_tag(:id, product.id) %>
+  <td><%= text_field_tag(:name, product.name) %></td>
+  <td><%= text_field_tag(:description, product.description) %></td>
+  <td><%= text_field_tag(:price, product.price) %>
+  	<%= submit_tag("Update") %></td>
+  <% end %>
+  <td>
+	<%= form_tag(admin_product_path, :method => "delete") do %>
+		<%= hidden_field_tag(:id, product.id) %>
+		<%= submit_tag("Delete") %>
+	<% end %>
+  </td>
+  </tr>
+<% end %>
+<tr><td>Nowy produkt</td></tr>
+<tr>
+	<%= form_tag(admin_product_path, :method => "post") do %>
+	<td><%= text_field_tag(:name) %></td>
+	<td><%= text_field_tag(:description) %></td>
+	<td><%= text_field_tag(:price) %></td>
+	<td><%= submit_tag("Create") %></td>
+	<% end %>
+</tr>
+</table>

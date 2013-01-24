@@ -1,0 +1,26 @@
+<h2>Oto twój koszyk:</h2>
+<table>
+<tr><td>Produkt</td><td>Ilość</td><td>Cena</td></tr>
+
+<% @order_items.each do |item| %>
+  <tr>
+  <td><%= item.product.name %></td>
+  <td><%= item.quantity %></td>
+  <td><%= item.price %></td>
+  </tr>
+<% end %>
+</table><br>
+<h2>Wypełnij formularz aby dokonczyc zamowienie</h2>
+<%= form_tag({:controller => "confirms", :action => "create"}, :method => "post") do %>
+  <%= label_tag("Imie:") %>
+  <% if user_signed_in? %>
+    <%= text_field_tag(:first_name, current_user.imie) %>
+    <%= label_tag("Nazwisko:") %>
+    <%= text_field_tag(:last_name, current_user.nazwisko) %>
+  <% else %>
+    <%= text_field_tag(:first_name) %>
+    <%= label_tag("Nazwisko:") %>
+    <%= text_field_tag(:last_name) %>
+  <% end %>
+  <%= submit_tag("Wyslij") %>
+<% end %>
